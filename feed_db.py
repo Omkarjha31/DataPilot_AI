@@ -20,7 +20,8 @@ DB_CONFIG = {
     "password": os.environ['password'],
 }
 
-CSV_DIR = "data"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CSV_DIR = os.path.join(BASE_DIR, "data")
 
 
 # ============================================================
