@@ -98,15 +98,15 @@ data_agent_graph.add_conditional_edges("router_node", route_edge,
 
 data_agent = data_agent_graph.compile()
 
-# Optional|
-from IPython.display import display, Image
-img = Image(data_agent.get_graph().draw_mermaid_png())
-with open("data_agent_graph.png", "wb") as f:
-    f.write(img.data)
-
-
-
 if __name__ == "__main__":
+    # Optional
+    try:
+        from IPython.display import display, Image
+        img = Image(data_agent.get_graph().draw_mermaid_png())
+        with open("data_agent_graph.png", "wb") as f:
+            f.write(img.data)
+    except Exception:
+        pass
 
     response = data_agent.invoke(
         {"messages":[HumanMessage(content="I want to extract the data from the API endpoint 'https://pokeapi.co/api/v2/pokemon' and save it to data/extract folder in the csv folder")],
