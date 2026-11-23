@@ -18,6 +18,9 @@ class DatabaseUtil:
         schema_info_context = ""
         
         connection = self.connection
+        if not connection:
+            return "Error: Database connection not established. Please check your database credentials in .env."
+
         cursor = connection.cursor()
 
         schema_info_context = f"Database Schema: {schema_name}\n"
@@ -77,15 +80,16 @@ class DatabaseUtil:
                 connection.close()
 
 
-obj = DatabaseUtil({
-    "host": "localhost",
-    "port": 5432,
-    "user": "postgres",
-    "password": "postgres",
-    "dbname": "postgres"
-})
+if __name__ == "__main__":
+    obj = DatabaseUtil({
+        "host": "localhost",
+        "port": 5432,
+        "user": "postgres",
+        "password": "postgres",
+        "dbname": "postgres"
+    })
 
-result = obj.schema_details("public")
+    result = obj.schema_details("public")
 
-with open("test_schema_details.txt", "w") as f:
-    f.write(result)
+    with open("test_schema_details.txt", "w") as f:
+        f.write(result)
